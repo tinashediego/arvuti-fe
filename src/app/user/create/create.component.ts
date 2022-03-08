@@ -51,7 +51,7 @@ export class CreateComponent implements OnInit {
   submit(){
     console.log(this.userForm.value);
     this.userService.create(this.userForm.value).subscribe((res:any) => {
-         console.log('User created successfully!');
+         alert('User created successfully!');
          this.router.navigateByUrl('user/index');
     })
   }
