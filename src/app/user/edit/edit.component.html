@@ -1,36 +1,67 @@
 <div class="container">
-    <h1>Update Post</h1>
+    <h1>Update User</h1>
    
     <a href="#" routerLink="/post/index" class="btn btn-primary">Back</a>
           
     <form [formGroup]="form" (ngSubmit)="submit()">
     
         <div class="form-group">
-            <label for="title">Title:</label>
+            <label for="firstName">firstName</label>
             <input 
-                formControlName="title"
-                id="title" 
+                formControlName="firstName"
+                id="firstName" 
                 type="text" 
-                [(ngModel)]="user.title"
+                [(ngModel)]="user.firstName"
                 class="form-control">
-            <div *ngIf="f['title'].touched && f['title'].invalid" class="alert alert-danger">
-                <div *ngIf="f['title'].errors && f['title'].errors['required']">Title is required.</div>
-            </div>
-        </div>
            
-        <div class="form-group">
-            <label for="body">Body</label>
-            <textarea 
-                formControlName="body"
-                id="body" 
-                type="text" 
-                [(ngModel)]="user.body"
-                class="form-control">
-            </textarea>
-            <div *ngIf="f['body'].touched && f['body'].invalid" class="alert alert-danger">
-                <div *ngIf="f['body'].errors && f['body'].errors['required']">Body is required.</div>
-            </div>
         </div>
+
+        <div class="form-group">
+            <label for="lastName">lastName</label>
+            <input 
+                formControlName="lastName"
+                id="lastName" 
+                type="text" 
+                [(ngModel)]="user.lastName"
+                class="form-control">
+           
+        </div>
+
+        <div class="form-group">
+            <label for="age">Age</label>
+            <input 
+                formControlName="age"
+                id="age" 
+                type="text" 
+                [(ngModel)]="user.age"
+                class="form-control">
+           
+        </div>
+
+        <div class="form-group">
+            <label for="firstName">Occupation</label>
+            <input 
+                formControlName="occupation"
+                id="occupation" 
+                type="text" 
+                [(ngModel)]="user.occupation"
+                class="form-control">
+           
+        </div>
+
+        <div class="form-group">
+            <label for="transaction">Transaction:</label>
+            <select  formControlName="transaction"
+            id="transaction" 
+            type="text" 
+            [(ngModel)]="user.transaction.amount"
+            class="form-control">
+            <option [value]="transaction.id" *ngFor="let transaction of transactions">{{transaction.amount}}</option>
+
+            </select>
+            
+        </div>
+            
          
         <button class="btn btn-primary" type="submit" [disabled]="!form.valid">Update</button>
     </form>

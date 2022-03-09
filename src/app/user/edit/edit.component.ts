@@ -3,6 +3,7 @@ import { UserService } from '../user.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { User } from '../user';
 import { FormGroup, FormControl, Validators} from '@angular/forms';
+import { Transaction } from '../transaction';
      
 @Component({
   selector: 'app-edit',
@@ -14,6 +15,7 @@ export class EditComponent implements OnInit {
   id!: number;
   user!: User;
   form!: FormGroup;
+  transactions: Transaction[] = [];
     
   /*------------------------------------------
   --------------------------------------------
@@ -32,14 +34,18 @@ export class EditComponent implements OnInit {
    * @return response()
    */
   ngOnInit(): void {
+    this.getAllTransactions()
     this.id = this.route.snapshot.params['postId'];
     this.userService.find(this.id).subscribe((data: User)=>{
       this.user = data;
     }); 
       
     this.form = new FormGroup({
-      title: new FormControl('', [Validators.required]),
-      body: new FormControl('', Validators.required)
+      firstName: new FormControl('', [Validators.required]),
+      lastName: new FormControl('', Validators.required),
+      age: new FormControl('', Validators.required),
+      occupation: new FormControl('', Validators.required),
+      transaction: new FormControl('', Validators.required)
     });
   }
     
@@ -62,6 +68,13 @@ export class EditComponent implements OnInit {
     this.userService.update(this.id, this.form.value).subscribe((res:any) => {
          alert('User updated successfully!');
          this.router.navigateByUrl('user/index');
+    })
+  }
+
+  getAllTransactions(){
+    this.userService.findTransactions().subscribe((res:any)=>{
+      this.transactions = res;
+      console.log(res)
     })
   }
    

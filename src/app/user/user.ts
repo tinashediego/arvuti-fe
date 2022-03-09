@@ -1,5 +1,10 @@
+import { Transaction } from "./transaction";
+
 export interface User {
     id: number;
-    title: string;
-    body: string;
+    firstName: string;
+    lastName: string;
+    occupation: string;
+    age: number;
+    transaction: Transaction;
 }
