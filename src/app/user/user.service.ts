@@ -72,6 +72,20 @@ export class UserService {
       catchError(this.errorHandler)
     )
   }
+
+   /**
+   * Write code on Method
+   *
+   * @return response()
+   */
+    findTransactions(): Observable<any> {
+  
+      return this.httpClient.get(this.apiURL + '/api/v1/transaction/')
+    
+      .pipe(
+        catchError(this.errorHandler)
+      )
+    }
     
   /**
    * Write code on Method

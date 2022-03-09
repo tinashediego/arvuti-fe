@@ -11,7 +11,7 @@ import { FormGroup, FormControl, Validators} from '@angular/forms';
 export class CreateComponent implements OnInit {
     
   userForm!: FormGroup;
-    
+    public transactions:any;
   /*------------------------------------------
   --------------------------------------------
   Created constructor
@@ -28,9 +28,13 @@ export class CreateComponent implements OnInit {
    * @return response()
    */
   ngOnInit(): void {
+    this.getAllTransactions();
     this.userForm = new FormGroup({
-      title: new FormControl('', [Validators.required]),
-      body: new FormControl('', Validators.required)
+      firstName: new FormControl('', [Validators.required]),
+      lastName: new FormControl('', Validators.required),
+      age: new FormControl('', Validators.required),
+      occupation: new FormControl('', Validators.required),
+      transaction: new FormControl('', Validators.required)
     });
   }
     
@@ -53,6 +57,13 @@ export class CreateComponent implements OnInit {
     this.userService.create(this.userForm.value).subscribe((res:any) => {
          alert('User created successfully!');
          this.router.navigateByUrl('user/index');
+    })
+  }
+
+  getAllTransactions(){
+    this.userService.findTransactions().subscribe((res:any)=>{
+      this.transactions = res;
+      console.log(res)
     })
   }
   
